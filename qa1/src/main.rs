@@ -14,8 +14,10 @@ impl IString {
     }
 }
 
+// I know a way in https://rust-unofficial.github.io/too-many-lists/second-iter-mut.html
+
 struct IterMut<'a> {
-    s: &'a mut OBString,
+    s: &'a mut OBString, //  I know Option<&'a mut IString> is ok, but why cannot this?
 }
 impl<'a> Iterator for IterMut<'a> {
     type Item = &'a mut String;
@@ -28,8 +30,10 @@ impl<'a> Iterator for IterMut<'a> {
 
 fn main() {
     let mut v1 = Some(Box::new(IString::new(String::from("a"))));
-    let iter = v1.iter_mut();
-    for v in iter {
+
+    for v in v1.iter_mut() {
+        println!("v={:?}", v);
+        *v = format!("11{}",*v);
         println!("v={:?}", v);
     }
 }
