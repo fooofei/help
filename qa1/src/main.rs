@@ -19,16 +19,6 @@ impl Node {
 struct NodeMutRef<'a> {
     n: &'a mut Option<Box<Node>>, //  I know Option<&'a mut Node> is ok, but why cannot this?
 }
-impl<'a> Iterator for NodeMutRef<'a> {
-    type Item = &'a mut String;
-    // how to return ?
-    // Please make a pull request or make a issue to help me fix this.
-    fn next(&mut self) -> Option<Self::Item> {
-        //    fn next(&mut self) -> Option<&mut String> {  // still error
-        //self.s.as_mut().map(|v| &mut (**v).s)
-        None
-    }
-}
 
 impl<'a> NodeMutRef<'a> {
 
